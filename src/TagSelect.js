@@ -17,6 +17,9 @@ class TagSelect extends React.Component {
     labelAttr: PropTypes.string,
     keyAttr: PropTypes.string,
 
+    // isRecommended
+    isRecommended: PropTypes.bool,
+
     // Available data
     data: PropTypes.array,
 
@@ -128,7 +131,8 @@ class TagSelect extends React.Component {
               {...this.props}
               label={i[this.props.labelAttr] ? i[this.props.labelAttr] : i}
               key={i[this.props.keyAttr] ? i[this.props.keyAttr] : i}
-              onPress={this.handleSelectItem.bind(this, i)}
+              onPress={this.props.isRecommended && !i.is_recommended ? null : this.handleSelectItem.bind(this, i)}
+              disabled={!i.is_recommended}
               selected={(this.state.value[i[this.props.keyAttr]] || this.state.value[i]) && true}
             />
           )
